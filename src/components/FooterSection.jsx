@@ -1,62 +1,21 @@
-import { Canvas, useFrame } from '@react-three/fiber';
-import { useGLTF } from '@react-three/drei';
-import { Suspense, useRef } from 'react';
-
-function CatModel() {
-  const { scene } = useGLTF('/cat.glb');
-  const ref = useRef();
-
-  useFrame(() => {
-    if (ref.current) {
-      ref.current.rotation.y += 0.003;
-    }
-  });
-
-  return (
-    <primitive object={scene} ref={ref} scale={2.2} position={[0, -0.3, 0]} />
-  );
-}
-
-function ModelCanvas() {
-  return (
-    <div className="flex justify-center">
-      <div className="w-[160px] h-[160px]">
-        <Canvas camera={{ position: [0, 0, 3], fov: 50 }}>
-          <ambientLight intensity={1.5} />
-          <directionalLight position={[2, 2, 3]} intensity={0.9} />
-          <Suspense fallback={null}>
-            <CatModel />
-          </Suspense>
-        </Canvas>
-      </div>
-    </div>
-  );
-}
-
 export default function FooterSection() {
   return (
-    <>
-      <ModelCanvas />
-      <footer className="pt-10 pb-16 text-sm text-zinc-500">
-        <div className="max-w-xl w-full mx-auto px-4 sm:px-6 lg:px-0 space-y-4">
-          <p className="text-[13px]">
-            © 2021 - {new Date().getFullYear()} Manjil Budhathoki. All Rights Reserved.
-          </p>
-          <p className="text-[13px]">www.buildwithmanjil.dev v.2025.05</p>
-          <p className="text-[13px]">
-            Website built using React & TailwindCSS (
-            <a
-              href="https://github.com/manjil-budhathoki/portfolio"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline underline-offset-2 hover:text-white"
-            >
-              view source
-            </a>
-            ).
+    <footer className="w-full py-12 text-[13px] text-zinc-600 font-normal tracking-tight">
+      <div className="max-w-[680px] mx-auto px-4 sm:px-6 lg:px-0 flex flex-col sm:flex-row justify-between gap-4">
+        
+        {/* Left: Quote + Credits */}
+        <div className="space-y-1 leading-relaxed">
+          <p>There’s beauty in the unknown.</p>
+          <p>
+            Design inspired by <a href="https://paco.me" target="_blank" rel="noopener noreferrer" className="underline hover:text-white transition">Paco</a>.
           </p>
         </div>
-      </footer>
-    </>
+
+        {/* Right: Personal stamp */}
+        <div className="sm:text-right text-zinc-500">
+          <p className="opacity-80">✧ born 2004</p>
+        </div>
+      </div>
+    </footer>
   );
 }
